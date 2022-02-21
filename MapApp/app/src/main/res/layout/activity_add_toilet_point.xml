@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddToiletPointActivity">
+
+    <TextView
+        android:id="@+id/coordsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/coordsText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pointLat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pointLat" />
+
+    <EditText
+        android:id="@+id/pointLat"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/enterCoordsHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toEndOf="@+id/coordsText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pointLon"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enterCoordsHint"
+        app:layout_constraintBottom_toBottomOf="@+id/pointLat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pointLat"
+        app:layout_constraintTop_toTopOf="@+id/pointLat" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titleText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pointTitle"
+        app:layout_constraintStart_toStartOf="@+id/coordsText"
+        app:layout_constraintTop_toTopOf="@+id/pointTitle" />
+
+    <EditText
+        android:id="@+id/pointTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/enterTitleHint"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/pointLon"
+        app:layout_constraintStart_toStartOf="@+id/pointLat"
+        app:layout_constraintTop_toBottomOf="@+id/pointLat" />
+
+    <TextView
+        android:id="@+id/descText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pointDesc"
+        app:layout_constraintStart_toStartOf="@+id/titleText"
+        app:layout_constraintTop_toBottomOf="@+id/pointTitle" />
+
+    <EditText
+        android:id="@+id/pointDesc"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/enterDescHint"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        app:layout_constraintEnd_toEndOf="@+id/pointTitle"
+        app:layout_constraintStart_toStartOf="@+id/pointTitle"
+        app:layout_constraintTop_toBottomOf="@+id/pointTitle" />
+
+    <Button
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="addToiletPoint"
+        android:text="@string/addBtnText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointDesc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
