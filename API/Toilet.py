@@ -6,7 +6,7 @@ class Toilet:
         self.lon = lon
         self.title = title
         self.desc = desc
-        self.address = address
+        # self.address = address
         
     def getCoords(self) -> tuple:
         return (self.lat, self.lon)

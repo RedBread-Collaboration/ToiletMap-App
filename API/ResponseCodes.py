@@ -8,3 +8,4 @@ def Forbidden(req):
 
 def BadRequest(req):
     return req.setResponseCode(400)
+

@@ -14,7 +14,7 @@ def print_error(tag, msg):
 
 
 config = ConfigParser()
-config.read("./apiConf.ini")
+# config.read("./apiConf.ini")
 
 try:
     server = config.get('API', 'server')
