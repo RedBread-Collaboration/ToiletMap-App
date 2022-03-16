@@ -19,4 +19,4 @@ class YaMap(Client):
 # coords = mp.getCoordsByAddress("Южно-Сахалинск Горького 25")
 # print(coords)
 # addr = mp.getAddressByCoords(lat=coords[0], lon=coords[1])
-print(addr)
+# print(addr)
