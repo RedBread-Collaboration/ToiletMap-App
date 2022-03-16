@@ -5,7 +5,7 @@ class ToiletDB:
     
     def connect(self):
         self.conn = sqlite3.connect("./DB/Toilets.db")
-        # return self.conn.cursor()
+        return self.conn.cursor()
         
     def close(self):
         self.conn.close()
