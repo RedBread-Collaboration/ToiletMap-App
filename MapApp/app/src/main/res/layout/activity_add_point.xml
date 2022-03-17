@@ -4,39 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddToiletPointActivity">
+    tools:context=".AddPointActivity">
 
     <TextView
-        android:id="@+id/coordsText"
+        android:id="@+id/streetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="@string/coordsText"
+        android:text="@string/streetText"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pointLat"
+        app:layout_constraintBottom_toBottomOf="@+id/street"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pointLat" />
+        app:layout_constraintTop_toTopOf="@+id/street" />
 
     <EditText
-        android:id="@+id/pointLat"
-        android:layout_width="80dp"
+        android:id="@+id/street"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:hint="@string/enterCoordsHint"
+        android:hint="@string/enterStreetHint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.351"
-        app:layout_constraintStart_toEndOf="@+id/coordsText"
+        app:layout_constraintStart_toEndOf="@+id/streetText"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/pointLon"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/enterCoordsHint"
-        app:layout_constraintBottom_toBottomOf="@+id/pointLat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pointLat"
-        app:layout_constraintTop_toTopOf="@+id/pointLat" />
 
     <TextView
         android:id="@+id/titleText"
@@ -45,7 +34,7 @@
         android:text="@string/titleText"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/pointTitle"
-        app:layout_constraintStart_toStartOf="@+id/coordsText"
+        app:layout_constraintStart_toStartOf="@+id/streetText"
         app:layout_constraintTop_toTopOf="@+id/pointTitle" />
 
     <EditText
@@ -55,9 +44,9 @@
         android:layout_marginTop="16dp"
         android:hint="@string/enterTitleHint"
         android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/pointLon"
-        app:layout_constraintStart_toStartOf="@+id/pointLat"
-        app:layout_constraintTop_toBottomOf="@+id/pointLat" />
+        app:layout_constraintEnd_toEndOf="@+id/street"
+        app:layout_constraintStart_toStartOf="@+id/street"
+        app:layout_constraintTop_toBottomOf="@+id/street" />
 
     <TextView
         android:id="@+id/descText"

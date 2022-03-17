@@ -13,4 +13,5 @@ public class ToiletPoints {
     public static void addToilet(Toilet toilet) {
         toiletList.add(toilet);
     }
+
 }

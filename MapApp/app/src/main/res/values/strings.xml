@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Toilets Map</string>
-    <string name="coordsText">Coords:</string>
-    <string name="enterCoordsHint">Coords</string>
+    <string name="streetText">Street:</string>
+    <string name="enterStreetHint">Enter street</string>
     <string name="descText">Description:</string>
     <string name="enterDescHint">Enter description</string>
     <string name="addBtnText">Add point</string>

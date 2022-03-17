@@ -1,0 +1,11 @@
+# VS Code Files
+.vscode/
+
+# Python Files
+__pycache__/
+
+# Database
+*.db
+
+# Tokens and etc.
+*.ini
