@@ -36,37 +36,40 @@ class ToiletDB:
         
     def getAllPoints(self) -> list:
         cur = self.connect()
-        toilets = cur.execute(f"SELECT * FROM {self.tablename}").fetchall()
-        return toilets
+        toiletList = cur.execute(f"SELECT * FROM {self.tablename}").fetchall()
+        for i in range(len(toiletList)):
+            toiletList[i] = Toilet(*toiletList[i]).toJSON()
+        return toiletList
         
     def getPointById(self, id:int) -> Toilet:
         cur = self.connect()
         toilet = cur.execute(f"SELECT * FROM {self.tablename} WHERE id={id}").fetchone()
-        return toilet
+        return Toilet(*toilet).toJSON()
         
-    def getPointByAddress(self, address:str) -> Toilet:
+    def getPointByAddress(self, address:str):
         cur = self.connect()
         toilet = cur.execute(f"SELECT * FROM {self.tablename} WHERE address='{address}'").fetchone()
-        return toilet
+        if toilet:
+            return Toilet(*toilet).toJSON()
     
-    def addPoint(self, toilet: Toilet) -> Toilet:
-        print(toilet.getTitle())
+    def addPoint(self, lat:float, lon:float, title:str, address:str, desc:str=""):
+        # print(title)
         cur = self.connect()
         cur.execute(f"""INSERT INTO {self.tablename} (
                 {self.t_lat},
                 {self.t_lon},
                 {self.t_title},
-                {self.t_desc},
-                {self.t_address}
+                {self.t_address},
+                {self.t_desc}
             ) VALUES (
-                '{toilet.getCoords()[0]}',
-                '{toilet.getCoords()[1]}',
-                '{toilet.getTitle()}',
-                '{toilet.getDesc()}',
-                '{toilet.getAddress()}'
+                '{lat}',
+                '{lon}',
+                '{title}',
+                '{address}',
+                '{desc}'
             )""")
         self.save()
-        return self.getPointByAddress(toilet.getAddress())
+        return self.getPointByAddress(address)
     
     def removePointById(self, id:int):
         cur = self.connect()

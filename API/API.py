@@ -2,7 +2,7 @@ from configparser import ConfigParser, NoSectionError
 from klein import run, route
 from ToiletDB import ToiletDB
 from PointsParser import YaMap
-import json
+from urllib.parse import unquote
 from Toilet import Toilet
 from ResponseCodes import *
 
@@ -49,77 +49,84 @@ yaMap = YaMap(map_token)
 
 @route('/getAllPoints/', branch=True)
 def getAllPoints(req):
-    data = req.content.read()
-    if data:
-        data = json.loads(data)
-        if data['token'] == token:
-            Succeed(req)
-            return str(db.getAllPoints())
+    key = req.getHeader('key')
+    if key == token:
+        toiletList = db.getAllPoints()
+        
+        SetResponseJSON(req)
+        Succeed(req)
+        return str(toiletList)
     return Forbidden(req)
 
 
-@route('/getPointById/<int:id>', branch=True)
-def getPointById(req, id=0):
-    data = req.content.read()
-    if req.content:
-        data = json.loads(data)
-        if data['token'] == token:
-            Succeed(req)
-            return str(db.getPointById(id))
+@route('/getPointById/', branch=True)
+def getPointById(req):
+    key = getKey(req)
+    if key == token:
+        id = req.getHeader('id')
+        toilet = db.getPointById(id)
+        
+        SetResponseJSON(req)
+        Succeed(req)
+        return str(toilet)
     return Forbidden(req)
 
 
-@route('/getPointByAddress/<string:address>', branch=True)
-def getPointByAddress(req, address=""):
-    data = req.content.read()
-    if req.content:
-        data = json.loads(data)
-        if data['token'] == token:
-            Succeed(req)
-            return str(db.getPointByAddress(address))
+@route('/getPointByAddress/', branch=True)
+def getPointByAddress(req):
+    key = getKey(req)
+    if key == token:
+        address = req.getHeader('address')
+        toilet = db.getPointByAddress(address)
+        
+        SetResponseJSON(req)
+        Succeed(req)
+        return str(toilet)
     return Forbidden(req)
 
 
-@route('/addPoint', methods=['POST'], branch=True)
+@route('/addPoint/', methods=['POST'], branch=True)
 def addPoint(req):
-    data = req.content.read()
-    if req.content:
-        data = json.loads(data)
-        if data['token'] == token:
+    key = key = getKey(req)
+    if key == token:
+        title = unquote(req.getHeader('title'))
+        address = unquote(req.getHeader('address'))
+        desc = unquote(req.getHeader('desc'))
+        
+        if db.getPointByAddress(address):
+            return BadRequest(req)
+        
+        if address:
+            lat, lon = yaMap.getCoordsByAddress(address)
             
-            if db.getPointByAddress(data['address']):
-                return BadRequest(req)
-            
-            if data['address']:
-                lat, lon = yaMap.getCoordsByAddress(data['address'])
-                
-            toilet = Toilet(
-                lat=lat,
-                lon=lon,
-                title=data['title'],
-                address=data['address'],
-                desc=data['desc']
-            )
-            Succeed(req)
-            return str(db.addPoint(toilet))
+        toilet = db.addPoint(
+            lat=lat,
+            lon=lon,
+            title=title,
+            address=address,
+            desc=desc
+        )
+        print(toilet)
+        SetResponseJSON(req)
+        Succeed(req)
+        return str(toilet)
     return Forbidden(req)
 
 
-@route('/removePointById/<int:id>', branch=True)
-def removePointById(req, id=0):
-    data = req.content.read()
-    if req.content:
-        data = json.loads(data)
-        if data['token'] == token:
-            db.removePointById(id)
-            Succeed(req)
-            return req.redirect('/')
+@route('/removePointById/', branch=True)
+def removePointById(req):
+    key = getKey(req)
+    if key == token:
+        id = req.getHeader('id')
+        db.removePointById(id)
+        Succeed(req)
+        return req.redirect('/')
     return Forbidden(req)
 
 
 @route('/')
 def index(req):
-    return req.redirect('/getAllPoints')
+    return req.redirect('/getAllPoints/')
 
 
 # infosakh.ru/wc/

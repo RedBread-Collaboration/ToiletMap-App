@@ -1,10 +1,17 @@
+def getKey(req):
+    return req.getHeader('key')
+
+
 def Succeed(req):
-    return req.setResponseCode(200)
+    req.setResponseCode(200)
 
 
 def Forbidden(req):
-    return req.setResponseCode(403)
+    req.setResponseCode(403)
 
 
 def BadRequest(req):
-    return req.setResponseCode(400)
+    req.setResponseCode(400)
+
+def SetResponseJSON(req):
+    req.setHeader('Content-Type', 'application/json')

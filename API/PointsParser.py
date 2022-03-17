@@ -5,7 +5,7 @@ class YaMap(Client):
     
     def __init__(self, token):
         super().__init__(token)
-        
+
     def getCoordsByAddress(self, address:str) -> tuple:
         lon, lat = self.coordinates(address)
         print(lon, lat)

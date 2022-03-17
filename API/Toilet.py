@@ -1,6 +1,6 @@
 class Toilet:
     
-    def __init__(self, lat:float, lon:float, title:str, address:str, desc:str=""):
+    def __init__(self, id:int, lat:float, lon:float, title:str, address:str, desc:str=""):
         self.id = id
         self.lat = lat
         self.lon = lon
@@ -33,13 +33,11 @@ class Toilet:
     def setDesc(self, desc):
         self.desc = desc
         
-    def getJSON(self) -> dict:
+    def toJSON(self) -> dict:
         toilet = {
             'id': self.id,
-            'coords': {
-                'lat': self.lat,
-                'lon': self.lon
-            },
+            'lat': self.lat,
+            'lon': self.lon,
             'title': self.title,
             'address': self.address,
             'desc': self.desc
