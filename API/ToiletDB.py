@@ -51,6 +51,12 @@ class ToiletDB:
         toilet = cur.execute(f"SELECT * FROM {self.tablename} WHERE address='{address}'").fetchone()
         if toilet:
             return Toilet(*toilet).toJSON()
+        
+    def getPointByCoords(self, lat:float, lon:float):
+        cur = self.connect()
+        toilet = cur.execute(f"SELECT * FROM {self.tablename} WHERE lat={lat} AND lon={lon}").fetchone()
+        if toilet:
+            return Toilet(*toilet).toJSON()
     
     def addPoint(self, lat:float, lon:float, title:str, address:str, desc:str=""):
         # print(title)
@@ -62,14 +68,32 @@ class ToiletDB:
                 {self.t_address},
                 {self.t_desc}
             ) VALUES (
-                '{lat}',
-                '{lon}',
+                {lat},
+                {lon},
                 '{title}',
                 '{address}',
                 '{desc}'
             )""")
         self.save()
         return self.getPointByAddress(address)
+    
+    def updatePoint(self, id:int, lat:float, lon:float, title:str, address:str, desc:str=""):
+        cur = self.connect()
+        cur.execute(f"""UPDATE {self.tablename} SET (
+                {self.t_lat},
+                {self.t_lon},
+                {self.t_title},
+                {self.t_address},
+                {self.t_desc}
+            ) = (
+                {lat},
+                {lon},
+                '{title}',
+                '{address}',
+                '{desc}'
+            ) WHERE id={id}""")
+        self.save()
+        return self.getPointById(id)
     
     def removePointById(self, id:int):
         cur = self.connect()

@@ -23,21 +23,18 @@ public class PointsListAdapter extends ArrayAdapter<Toilet> {
         this.pointsList = pointsList;
     }
 
+    @Override
     public View getView(int pos, View convertView, ViewGroup parent) {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
 
-        TextView titleView = view.findViewById(R.id.title);
-        TextView descView = view.findViewById(R.id.desc);
-
         Toilet toilet = pointsList.get(pos);
-
+        TextView titleView = view.findViewById(R.id.title);
         titleView.setText(toilet.getTitle());
-        descView.setText(toilet.getDesc() + '\n');
-
-        descView.setVisibility(View.GONE);
+        view.setContentDescription(String.valueOf(toilet.getId()));
 
         return view;
     }
+
 }

@@ -13,19 +13,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/addToiletPoint"-->
-<!--            style="@style/Widget.AppCompat.Button.Borderless"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/changeLayerBtn"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:onClick="openAddingToiletPoint"-->
-<!--            android:src="@drawable/add_btn"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginEnd="12dp" />-->
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/addToiletPoint"-->
+        <!--            style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/changeLayerBtn"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:onClick="openAddingToiletPoint"-->
+        <!--            android:src="@drawable/add_btn"-->
+        <!--            android:layout_marginTop="12dp"-->
+        <!--            android:layout_marginEnd="12dp" />-->
 
     </com.yandex.mapkit.mapview.MapView>
 
@@ -37,5 +37,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="findMe"
+        android:src="@drawable/my_loc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

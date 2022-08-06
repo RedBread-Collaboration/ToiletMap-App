@@ -1,0 +1,4 @@
+2022-05-23 17:33:02+0300 [-] Log opened.
+2022-05-23 17:33:02+0300 [-] Site starting on 8080
+2022-05-23 17:33:02+0300 [-] Starting factory <twisted.web.server.Site object at 0x7f44b7d0f8d0>
+2022-05-23 17:33:05+0300 [-] "172.22.0.4" - - [23/May/2022:14:33:04 +0000] "GET /getAllPoints/ HTTP/1.1" 200 717 "-" "Dalvik/2.1.0 (Linux; U; Android 10; SM-J810F Build/QP1A.190711.020)"

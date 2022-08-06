@@ -12,7 +12,12 @@ class YaMap(Client):
         return (float(lat), float(lon))
     
     def getAddressByCoords(self, lat:float, lon:float) -> str:
-        return self.address(longitude=lon, latitude=lat)
+        return self.address(latitude=lat, longitude=lon)
+    
+    def getCityByCoords(self, lat:float, lon:float):
+        city = self.address(latitude=lat, longitude=lon)
+        print(city)
+        return city
 
 
 # mp = YaMap()

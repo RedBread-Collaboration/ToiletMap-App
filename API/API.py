@@ -3,8 +3,10 @@ from klein import run, route
 from ToiletDB import ToiletDB
 from PointsParser import YaMap
 from urllib.parse import unquote
-from Toilet import Toilet
+# from Toilet import Toilet
 from ResponseCodes import *
+from datetime import datetime as dt
+
 
 def print_error(tag, msg):
     color_red = '\033[91m'
@@ -45,15 +47,23 @@ if not map_token:
 
 db = ToiletDB()
 yaMap = YaMap(map_token)
+now_date = dt.strftime(dt.now(), "%Y-%m-%d %H-%M-%S")
+logFile = open(f'./logs/{now_date}.log', 'w')
+
+# logFile = FileHandler("./latest.log", 'a', "utf-8")
+# logging.basicConfig(filename=("./latest.log"))
+# logging.basicConfig(filename=("keylog.txt"), level=logging.DEBUG, format=" %(asctime)s - %(message)s")
+
+TAG = "ToiletMap"
 
 
 @route('/getAllPoints/', branch=True)
 def getAllPoints(req):
-    key = req.getHeader('key')
+    key = getKey('key')
     if key == token:
         toiletList = db.getAllPoints()
         
-        SetResponseJSON(req)
+        SetContentTypeJSON(req)
         Succeed(req)
         return str(toiletList)
     return Forbidden(req)
@@ -66,7 +76,7 @@ def getPointById(req):
         id = req.getHeader('id')
         toilet = db.getPointById(id)
         
-        SetResponseJSON(req)
+        SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
     return Forbidden(req)
@@ -79,9 +89,37 @@ def getPointByAddress(req):
         address = req.getHeader('address')
         toilet = db.getPointByAddress(address)
         
-        SetResponseJSON(req)
+        SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
+    return Forbidden(req)
+
+
+@route('/getPointByCoords/', branch=True)
+def getPointByCoords(req):
+    key = getKey(req)
+    if key == token:
+        lat = req.getHeader('lat')
+        lon = req.getHeader('lon')
+        toilet = db.getPointByCoords(lat, lon)
+        
+        SetContentTypeJSON(req)
+        Succeed(req)
+        return str(toilet)
+    return Forbidden(req)
+
+
+@route('/getCityByCoords/', branch=True)
+def getCityByCoords(req):
+    key = getKey(req)
+    if key == token:
+        lat = req.getHeader('lat')
+        lon = req.getHeader('lon')
+        city = yaMap.getCityByCoords(lat, lon).split(', ')[2]
+        
+        SetContentTypeJSON(req)
+        Succeed(req)
+        return city
     return Forbidden(req)
 
 
@@ -90,14 +128,18 @@ def addPoint(req):
     key = key = getKey(req)
     if key == token:
         title = unquote(req.getHeader('title'))
-        address = unquote(req.getHeader('address'))
+        # address = unquote(req.getHeader('address'))
+        lat = float(req.getHeader('lat'))
+        lon = float(req.getHeader('lon'))
         desc = unquote(req.getHeader('desc'))
         
-        if db.getPointByAddress(address):
-            return BadRequest(req)
+        address = yaMap.getAddressByCoords(lat, lon)
+        # if db.getPointByAddress(address):
+        #     return BadRequest(req)
         
-        if address:
-            lat, lon = yaMap.getCoordsByAddress(address)
+        # if address:
+        #     lat, lon = yaMap.getCoordsByAddress(address)
+        #     address = yaMap.getAddressByCoords(lat, lon)
             
         toilet = db.addPoint(
             lat=lat,
@@ -106,29 +148,56 @@ def addPoint(req):
             address=address,
             desc=desc
         )
-        print(toilet)
-        SetResponseJSON(req)
+        SetContentTypeJSON(req)
+        Created(req)
+        return str(toilet)
+    return Forbidden(req)
+
+
+@route('/updatePoint/', methods=['PUT'], branch=True)
+def updatePoint(req):
+    key = getKey(req)
+    if key == token:
+        id = int(req.getHeader('id'))
+        title = unquote(req.getHeader('title'))
+        # address = unquote(req.getHeader('address'))
+        lat = float(req.getHeader('lat'))
+        lon = float(req.getHeader('lon'))
+        desc = unquote(req.getHeader('desc'))
+        address = yaMap.getAddressByCoords(lat, lon)
+        
+        if not db.getPointByAddress(address):
+            return BadRequest(req)
+        
+        # if address:
+        #     lat, lon = yaMap.getCoordsByAddress(address)
+        #     address = yaMap.getAddressByCoords(lat, lon)
+        
+        toilet = db.updatePoint(
+            id=id,
+            lat=lat,
+            lon=lon,
+            title=title,
+            address=address,
+            desc=desc,
+        )
+        SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
     return Forbidden(req)
 
 
-@route('/removePointById/', branch=True)
+@route('/removePointById/', methods=['DELETE'], branch=True)
 def removePointById(req):
     key = getKey(req)
     if key == token:
-        id = req.getHeader('id')
+        id = int(req.getHeader('id'))
         db.removePointById(id)
-        Succeed(req)
-        return req.redirect('/')
+        return NoContent(req)
     return Forbidden(req)
 
 
-@route('/')
-def index(req):
-    return req.redirect('/getAllPoints/')
-
-
-# infosakh.ru/wc/
+# infosakh.ru/services/wc/
 print(f"http://{server}:{port}")
-run(server, port)
+print(f"Started logging to {now_date}.log file...")
+run(server, port, logFile)
