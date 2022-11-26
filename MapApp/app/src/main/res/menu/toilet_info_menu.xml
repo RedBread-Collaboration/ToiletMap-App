@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/modeBtn"
+        android:icon="@drawable/edit"
+        android:onClick="changeMode"
+        android:title="@string/mode_info"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/removeBtn"
+        android:icon="@drawable/remove"
+        android:onClick="removePointById"
+        android:title="@string/remove"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Карта Туалетов</string>
+
+    <!-- For app work -->
+    <string name="layer_map">Карта</string>
+    <string name="layer_list">Список</string>
+    <string name="mode_edit">Редактировать</string>
+    <string name="mode_info">Информация</string>
+
+    <!-- Fields Titles -->
+    <string name="title_text">Заголовок</string>
+    <string name="address_text">Адрес</string>
+    <string name="desc_text">Описание</string>
+
+    <!-- Fields Hints -->
+    <string name="title_hint">Введите заголовок</string>
+    <string name="address_hint">Введите адрес</string>
+    <string name="desc_hint">Введите описание</string>
+
+    <!-- Btn Texts -->
+    <string name="add">Добавить</string>
+    <string name="remove">Удалить</string>
+    <string name="close">Закрыть</string>
+
+    <!-- Activity Titles -->
+    <string name="activity_addPoint_title">Новая точка</string>
+
+    <!-- Alert Titles -->
+    <string name="warning">Предупреждение</string>
+    <string name="error">Ошибка</string>
+    <string name="save">Сохранить</string>
+    <string name="route">Добраться сюда</string>
+
+    <!-- Alert Messages -->
+    <string name="close_warning_msg">Закрыть окно? Все изменения будут отменены</string>
+    <string name="save_warning_msg">Сохранить изменения?</string>
+    <string name="remove_warning_msg">Удалить точку безвозвратно?</string>
+    <string name="address_error_msg">Обязательное поле \'Адрес\' не заполнено</string>
+    <string name="title_error_msg">Обязательное поле \'Заголовок\' не заполнено</string>
+
+    <!-- Alert Btn Texts -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="ok">Ок</string>
+
+    <!-- Toast Messages -->
+    <string name="added">Добавлено</string>
+    <string name="removed">Удалено</string>
+    <string name="changed">Изменено</string>
+    <string name="saved">Сохранено</string>
+</resources>

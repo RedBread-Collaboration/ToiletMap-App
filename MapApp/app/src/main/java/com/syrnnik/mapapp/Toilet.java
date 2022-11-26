@@ -1,14 +1,19 @@
 package com.syrnnik.mapapp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Toilet {
 
+    private final int id;
     private double lat;
     private double lon;
     private String title;
     private String address;
     private String desc;
 
-    public Toilet(double lat, double lon, String title, String address, String desc) {
+    public Toilet(int id, double lat, double lon, String title, String address, String desc) {
+        this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.title = title;
@@ -16,7 +21,8 @@ public class Toilet {
         this.desc = desc;
     }
 
-    public Toilet(Object lat, Object lot, Object title, Object address, Object desc) {
+    public int getId() {
+        return this.id;
     }
 
     public double getLat() {
@@ -35,9 +41,9 @@ public class Toilet {
         this.title = title;
     }
 
-    public void setCoords(double _lat, double _lon) {
-        this.lat = _lat;
-        this.lon = _lon;
+    public void setCoords(double lat, double lon) {
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public String getAddress() {
@@ -52,8 +58,19 @@ public class Toilet {
         return this.desc;
     }
 
-    public void setDesc(String newDesc) {
-        this.desc = newDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject toilet = new JSONObject();
+        toilet.put("id", this.getId());
+        toilet.put("lat", this.getLat());
+        toilet.put("lon", this.getLon());
+        toilet.put("title", this.getTitle());
+        toilet.put("address", this.getAddress());
+        toilet.put("desc", this.getDesc());
+        return toilet;
     }
 
 }

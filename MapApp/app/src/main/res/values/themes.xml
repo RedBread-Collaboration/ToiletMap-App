@@ -13,4 +13,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="InfoTitle">
+        <item name="fontFamily">@font/</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="InfoText">
+        <item name="fontFamily">@font/</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <!-- TODO: change buttons design (font, style, ...) -->
+
 </resources>

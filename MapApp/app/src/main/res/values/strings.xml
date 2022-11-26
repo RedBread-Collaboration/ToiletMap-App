@@ -1,16 +1,51 @@
 <resources>
     <string name="app_name">Toilets Map</string>
-    <string name="streetText">Street:</string>
-    <string name="enterStreetHint">Enter street</string>
-    <string name="descText">Description:</string>
-    <string name="enterDescHint">Enter description</string>
-    <string name="addBtnText">Add point</string>
-    <string name="addPointTitle">Add new toilet</string>
-    <string name="enterTitleHint">Enter title</string>
-    <string name="layer_map">map</string>
-    <string name="layer_list">list</string>
-    <string name="desc_add">add</string>
-    <string name="titleText">Title:</string>
-    <string name="hidden">hidden</string>
-    <string name="shown">shown</string>
+
+    <!-- For app work -->
+    <string name="layer_map">Map</string>
+    <string name="layer_list">List</string>
+    <string name="mode_edit">Edit</string>
+    <string name="mode_info">Info</string>
+
+    <!-- Fields Titles -->
+    <string name="title_text">Title</string>
+    <string name="address_text">Address</string>
+    <string name="desc_text">Description</string>
+
+    <!-- Fields Hints -->
+    <string name="title_hint">Enter title</string>
+    <string name="address_hint">Enter address</string>
+    <string name="desc_hint">Enter description</string>
+
+    <!-- Btn Texts -->
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="close">Close</string>
+    <string name="route">Get there</string>
+
+    <!-- Activity Titles -->
+    <string name="activity_addPoint_title">New Point</string>
+
+    <!-- Alert Titles -->
+    <string name="warning">Warning</string>
+    <string name="error">Error</string>
+    <string name="save">Save</string>
+
+    <!-- Alert Messages -->
+    <string name="close_warning_msg">Close windows? All changes will be canceled</string>
+    <string name="save_warning_msg">Save changes?</string>
+    <string name="remove_warning_msg">Remove point?</string>
+    <string name="address_error_msg">Required field \'Address\' is empty</string>
+    <string name="title_error_msg">Required field \'Заголовок\' is empty</string>
+
+    <!-- Alert Btn Texts -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+
+    <!-- Toast Messages -->
+    <string name="added">Added</string>
+    <string name="removed">Removed</string>
+    <string name="changed">Changed</string>
+    <string name="saved">Saved</string>
 </resources>

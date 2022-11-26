@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/addToiletBtn"
         android:icon="@drawable/add_btn"
-        app:showAsAction="ifRoom"
         android:onClick="openAddingToiletPoint"
-        android:title="" />
+        android:title=""
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/layerBtn"
         android:icon="@drawable/layer"
-        app:showAsAction="always"
         android:onClick="changeLayer"
-        android:title="@string/layer_map" />
+        android:title="@string/layer_map"
+        app:showAsAction="always" />
 </menu>
