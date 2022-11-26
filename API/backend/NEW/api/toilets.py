@@ -8,12 +8,12 @@ from models.toilet import Toilet
 toilets_router = APIRouter(prefix='/toilets', tags=['toilets'])
 
 
-@toilets_router.post("/addToilet")
-def addToilet(lat: float,
-              lon: float,
-              title: str,
-              desc: str,
-              db: Session = Depends(get_db)):
+@toilets_router.post("/addPoint")
+def addPoint(lat: float,
+             lon: float,
+             title: str,
+             desc: str,
+             db: Session = Depends(get_db)):
     toilet_model = Toilet()
     toilet_model.lat = lat
     toilet_model.lon = lon
@@ -23,16 +23,16 @@ def addToilet(lat: float,
 
     db.add(toilet_model)
     db.commit()
-    return getToiletById(toilet_model.id, db)
+    return getPointById(toilet_model.id, db)
 
 
-@toilets_router.get("/getAllToilets")
-def getAllToilets(db: Session = Depends(get_db)):
+@toilets_router.get("/getAllPoints")
+def getAllPoints(db: Session = Depends(get_db)):
     return db.query(Toilet).all()
 
 
-@toilets_router.get("/getToiletById")
-def getToiletById(toilet_id: int, db: Session = Depends(get_db)):
+@toilets_router.get("/getPointById")
+def getPointById(toilet_id: int, db: Session = Depends(get_db)):
     toilet_model = db.query(Toilet).filter(Toilet.id == toilet_id).first()
 
     if toilet_model is None:
@@ -44,13 +44,41 @@ def getToiletById(toilet_id: int, db: Session = Depends(get_db)):
     return toilet_model
 
 
-@toilets_router.put("/updateToilet")
-def updateToilet(toilet_id: int,
-                 lat: float,
-                 lon: float,
-                 title: str,
-                 desc: str,
-                 db: Session = Depends(get_db)):
+@toilets_router.get("/getPointByAddress")
+def getPointByAddress(address: int, db: Session = Depends(get_db)):
+    toilet_model = db.query(Toilet).filter(Toilet.address == address).first()
+
+    if toilet_model is None:
+        raise HTTPException(    
+            status_code=404,
+            detail=f"Toilet with Address {address} is not exist"
+        )
+
+    return toilet_model
+
+
+@toilets_router.get("/getPointByCoords")
+def getPointByCoords(lat: float, lon: float, db: Session = Depends(get_db)):
+    toilet_model = db.query(Toilet).filter(
+        Toilet.lat == lat and Toilet.lon == lon
+    ).first()
+
+    if toilet_model is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Toilet with Coords {lat}, {lon} is not exist"
+        )
+
+    return toilet_model
+
+
+@toilets_router.put("/updatePoint")
+def updatePoint(toilet_id: int,
+                lat: float,
+                lon: float,
+                title: str,
+                desc: str,
+                db: Session = Depends(get_db)):
     toilet_model = db.query(Toilet).filter(Toilet.id == toilet_id).first()
 
     if toilet_model is None:
@@ -67,11 +95,11 @@ def updateToilet(toilet_id: int,
 
     db.add(toilet_model)
     db.commit()
-    return getToiletById(toilet_model.id, db)
+    return getPointById(toilet_model.id, db)
 
 
-@toilets_router.delete("/deleteToilet")
-def deleteToilet(toilet_id: int, db: Session = Depends(get_db)):
+@toilets_router.delete("/removePointById")
+def removePointById(toilet_id: int, db: Session = Depends(get_db)):
     toilet_model = db.query(Toilet).filter(Toilet.id == toilet_id).first()
 
     if toilet_model is None:

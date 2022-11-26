@@ -37,10 +37,10 @@ except NoSectionError:
     config.write(conf_file)
     conf_file.close()
     print_error("Config Error", "apiConf.ini file not found")
-    
+
 if not token:
     print_error("API Config Error", "field 'token' is empty")
-    
+
 if not map_token:
     print_error("API Config Error", "field 'map_token' is empty")
 
@@ -62,7 +62,7 @@ def getAllPoints(req):
     key = getKey('key')
     if key == token:
         toiletList = db.getAllPoints()
-        
+
         SetContentTypeJSON(req)
         Succeed(req)
         return str(toiletList)
@@ -75,7 +75,7 @@ def getPointById(req):
     if key == token:
         id = req.getHeader('id')
         toilet = db.getPointById(id)
-        
+
         SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
@@ -88,7 +88,7 @@ def getPointByAddress(req):
     if key == token:
         address = req.getHeader('address')
         toilet = db.getPointByAddress(address)
-        
+
         SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
@@ -102,7 +102,7 @@ def getPointByCoords(req):
         lat = req.getHeader('lat')
         lon = req.getHeader('lon')
         toilet = db.getPointByCoords(lat, lon)
-        
+
         SetContentTypeJSON(req)
         Succeed(req)
         return str(toilet)
@@ -116,7 +116,7 @@ def getCityByCoords(req):
         lat = req.getHeader('lat')
         lon = req.getHeader('lon')
         city = yaMap.getCityByCoords(lat, lon).split(', ')[2]
-        
+
         SetContentTypeJSON(req)
         Succeed(req)
         return city
@@ -132,15 +132,15 @@ def addPoint(req):
         lat = float(req.getHeader('lat'))
         lon = float(req.getHeader('lon'))
         desc = unquote(req.getHeader('desc'))
-        
+
         address = yaMap.getAddressByCoords(lat, lon)
         # if db.getPointByAddress(address):
         #     return BadRequest(req)
-        
+
         # if address:
         #     lat, lon = yaMap.getCoordsByAddress(address)
         #     address = yaMap.getAddressByCoords(lat, lon)
-            
+
         toilet = db.addPoint(
             lat=lat,
             lon=lon,
@@ -165,14 +165,14 @@ def updatePoint(req):
         lon = float(req.getHeader('lon'))
         desc = unquote(req.getHeader('desc'))
         address = yaMap.getAddressByCoords(lat, lon)
-        
+
         if not db.getPointByAddress(address):
             return BadRequest(req)
-        
+
         # if address:
         #     lat, lon = yaMap.getCoordsByAddress(address)
         #     address = yaMap.getAddressByCoords(lat, lon)
-        
+
         toilet = db.updatePoint(
             id=id,
             lat=lat,

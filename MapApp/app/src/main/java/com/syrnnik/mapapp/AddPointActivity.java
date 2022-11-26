@@ -85,7 +85,7 @@ public class AddPointActivity extends AppCompatActivity {
             @Override
             public java.util.Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("key", MainActivity.REQ_TOKEN);
+//                headers.put("key", MainActivity.REQ_TOKEN);
 //                headers.put("address", MainActivity.userCity + " " + address.getText().toString());
                 headers.put("lat", Objects.requireNonNull(MainActivity.userCoords.get("lat")).toString());
                 headers.put("lon", Objects.requireNonNull(MainActivity.userCoords.get("lon")).toString());

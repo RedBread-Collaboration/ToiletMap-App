@@ -27,7 +27,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.yandex.mapkit.MapKit;
 import com.yandex.mapkit.MapKitFactory;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements
 
     public final static String REQ_TOKEN = "ba661e842cfe7b9dce1a5153c6e80d5e";
     public final static String TAG = "ToiletMap";
-//    private final Point UUS_LOCATION = new Point(46.943721, 142.743442);
+    //    private final Point UUS_LOCATION = new Point(46.943721, 142.743442);
     public final static ToiletPoints toiletPoints = new ToiletPoints();
     public final static ToiletRouter routeListener = new ToiletRouter();
     private final static String MAPKIT_API_KEY = "389adb7c-8004-48c6-b26b-17a90bfd97e4";
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public java.util.Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("key", REQ_TOKEN);
+//                headers.put("key", REQ_TOKEN);
                 return headers;
             }
         };
@@ -132,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements
         );
         toiletPoints.addToilet(toilet);
         mapView.getMap().getMapObjects().addPlacemark(
-                new Point(toilet.getLat(), toilet.getLon()),
-                ImageProvider.fromResource(context, R.drawable.toilet32))
+                        new Point(toilet.getLat(), toilet.getLon()),
+                        ImageProvider.fromResource(context, R.drawable.toilet32))
                 .addTapListener((mapObject, toiletPoint) -> {
 //                    Log.e(TAG, "CLICKED");
                     try {
@@ -193,34 +192,34 @@ public class MainActivity extends AppCompatActivity implements
             showPoint(context, pointsArray.getJSONObject(i));
     }
 
-    public static String getUserCityByCoords(Context context, double lat, double lon) {
-        StringRequest request = new StringRequest(
-                Request.Method.GET, ServerUrls.GET_USER_CITY_BY_COORDS,
-                response -> {
-//                    Log.e(MainActivity.TAG, response);
-                    userCity = response;
-                },
-                error -> {
-                    try {
-                        checkErrors(context, error);
-                    } catch (JSONException | IOException jsonException) {
-                        jsonException.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public java.util.Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("key", REQ_TOKEN);
-                headers.put("lat", Objects.requireNonNull(userCoords.get("lat")).toString());
-                headers.put("lon", Objects.requireNonNull(userCoords.get("lon")).toString());
-                return headers;
-            }
-        };
-        request.setTag(TAG);
-        queue.add(request);
-        return userCity;
-    }
+//    public static String getUserCityByCoords(Context context, double lat, double lon) {
+//        StringRequest request = new StringRequest(
+//                Request.Method.GET, ServerUrls.GET_USER_CITY_BY_COORDS,
+//                response -> {
+////                    Log.e(MainActivity.TAG, response);
+//                    userCity = response;
+//                },
+//                error -> {
+//                    try {
+//                        checkErrors(context, error);
+//                    } catch (JSONException | IOException jsonException) {
+//                        jsonException.printStackTrace();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public java.util.Map<String, String> getHeaders() {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("key", REQ_TOKEN);
+//                headers.put("lat", Objects.requireNonNull(userCoords.get("lat")).toString());
+//                headers.put("lon", Objects.requireNonNull(userCoords.get("lon")).toString());
+//                return headers;
+//            }
+//        };
+//        request.setTag(TAG);
+//        queue.add(request);
+//        return userCity;
+//    }
 
     public static void showMsg(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

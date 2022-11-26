@@ -128,7 +128,7 @@ public class ToiletInfoActivity extends AppCompatActivity {
                         @Override
                         public java.util.Map<String, String> getHeaders() {
                             HashMap<String, String> headers = new HashMap<>();
-                            headers.put("key", MainActivity.REQ_TOKEN);
+//                            headers.put("key", MainActivity.REQ_TOKEN);
                             headers.put("id", String.valueOf(id));
                             return headers;
                         }
@@ -228,7 +228,7 @@ public class ToiletInfoActivity extends AppCompatActivity {
                         @Override
                         public java.util.Map<String, String> getHeaders() {
                             HashMap<String, String> headers = new HashMap<>();
-                            headers.put("key", MainActivity.REQ_TOKEN);
+//                            headers.put("key", MainActivity.REQ_TOKEN);
                             headers.put("id", String.valueOf(id));
                             headers.put("title", title);
 //                             headers.put("address", MainActivity.userCity + " " + address);
