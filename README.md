@@ -1,2 +1,2 @@
 # ToiletMap
-App with city's toilets map
+App with toilets map
